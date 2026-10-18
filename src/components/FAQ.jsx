@@ -42,7 +42,7 @@ export default function FAQ() {
   const [open, setOpen] = useState(0)
 
   return (
-    <section id="faq" className="py-20 lg:py-28" style={{ background: '#F8F9FB' }}>
+    <section id="faq" className="py-12 lg:py-16" style={{ background: '#F8F9FB' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-5 gap-14">
           {/* Left sticky label */}

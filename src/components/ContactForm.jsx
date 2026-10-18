@@ -56,7 +56,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="py-20 lg:py-28 relative overflow-hidden"
+    <section id="contact" className="py-12 lg:py-16 relative overflow-hidden"
       style={{ background: 'linear-gradient(135deg, #F5A623 0%, #E8960E 40%, #F5C342 100%)' }}>
       <div className="absolute inset-0 opacity-10"
         style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #1A1F16 1px, transparent 0)', backgroundSize: '32px 32px' }} />

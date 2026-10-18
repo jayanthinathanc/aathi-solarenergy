@@ -61,7 +61,7 @@ export default function Packages() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="packages" className="py-20 lg:py-28 bg-tint">
+    <section id="packages" className="py-12 lg:py-16 bg-tint">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           ref={ref}

@@ -66,7 +66,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section id="reviews" className="py-20 lg:py-28" style={{ background: '#0f2207' }}>
+    <section id="reviews" className="py-12 lg:py-16" style={{ background: '#0f2207' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Header */}

@@ -137,7 +137,7 @@ export default function Products() {
   const filtered = activeCategory === 'All' ? products : products.filter(p => p.category === activeCategory)
 
   return (
-    <section id="products" className="py-20 lg:py-28" style={{ background: '#E6EFE0' }}>
+    <section id="products" className="py-12 lg:py-16" style={{ background: '#E6EFE0' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           ref={ref}

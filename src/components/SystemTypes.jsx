@@ -467,7 +467,7 @@ export default function SystemTypes() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.08 })
 
   return (
-    <section id="systems" className="py-20 lg:py-28" style={{ background: '#F8F9FB' }}>
+    <section id="systems" className="py-12 lg:py-16" style={{ background: '#F8F9FB' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           ref={ref}

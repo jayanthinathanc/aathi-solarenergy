@@ -68,7 +68,7 @@ export default function WhyUs() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="why-us" className="py-20 lg:py-28" style={{ background: '#E6EFE0' }}>
+    <section id="why-us" className="py-12 lg:py-16" style={{ background: '#E6EFE0' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left text */}

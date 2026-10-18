@@ -96,7 +96,7 @@ export default function WhySolar() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="why-solar" className="py-20 lg:py-28" style={{ background: '#F8F9FB' }}>
+    <section id="why-solar" className="py-12 lg:py-16" style={{ background: '#F8F9FB' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           ref={ref}

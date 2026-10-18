@@ -74,7 +74,7 @@ export default function Services() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="services" className="py-20 lg:py-28" style={{ background: '#F6F9F3' }}>
+    <section id="services" className="py-12 lg:py-16" style={{ background: '#F6F9F3' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div

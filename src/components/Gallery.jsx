@@ -117,7 +117,7 @@ export default function Gallery() {
   const filtered = filter === 'All' ? projects : projects.filter(p => p.type === filter)
 
   return (
-    <section id="gallery" className="py-20 lg:py-28" style={{ background: '#F6F9F3' }}>
+    <section id="gallery" className="py-12 lg:py-16" style={{ background: '#F6F9F3' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

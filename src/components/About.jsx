@@ -13,13 +13,12 @@ export default function About() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="about" className="py-20 lg:py-28" style={{ background: '#F8F9FB' }}>
+    <section id="about" className="py-12 lg:py-16" style={{ background: '#F8F9FB' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div ref={ref} className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* Left — Story */}
           <motion.div
-            ref={ref}
             initial={{ opacity: 0, x: -36 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
@@ -76,7 +75,7 @@ export default function About() {
           </motion.div>
 
           {/* Right — Highlights */}
-          <div ref={ref} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
             {highlights.map((h, i) => (
               <motion.div
                 key={h.title}

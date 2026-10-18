@@ -76,8 +76,8 @@ export default function HowItWorks() {
   }, [inView])
 
   return (
-    <section id="how-it-works" className="py-20 lg:py-28 bg-tint">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="how-it-works" className="py-12 lg:py-16 bg-tint">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -107,7 +107,7 @@ export default function HowItWorks() {
         </motion.div>
 
         {/* Desktop horizontal timeline */}
-        <div ref={ref} className="hidden lg:block">
+        <div className="hidden lg:block">
           <div className="relative">
             {/* Progress line */}
             {/* <div className="timeline-line"> */}
