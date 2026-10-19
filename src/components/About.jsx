@@ -25,7 +25,7 @@ export default function About() {
             className="text-center lg:text-left">
             <div className="section-pill mb-5 mx-auto lg:mx-0 w-fit">
               <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
               </svg>
               About Aathi Solar
             </div>
@@ -76,7 +76,7 @@ export default function About() {
 
           {/* Right — Highlights */}
           <div className="flex flex-col gap-4">
-            {highlights.map((h, i) => (
+            {/* {highlights.map((h, i) => (
               <motion.div
                 key={h.title}
                 initial={{ opacity: 0, x: 32 }}
@@ -90,7 +90,26 @@ export default function About() {
                   <p className="text-xs leading-relaxed" style={{ color: '#5A6A55' }}>{h.desc}</p>
                 </div>
               </motion.div>
-            ))}
+            ))} */}
+            <motion.div
+              initial={{ opacity: 0, x: 32 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.1, duration: 0.6 }}
+              className="card-lift bg-white rounded-2xl p-5"
+              style={{ border: '1px solid #EEF3E6' }}>
+              <div>
+                <h4 className="font-bold text-sm mb-3" style={{ color: '#1A1F16' }}>Our Location</h4>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.83961418449!2d77.37164787399377!3d8.80113449251629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b042f62a3852165%3A0xdeb91c25e71548e4!2sAATHI%20SOLAR%20ENERGY!5e0!3m2!1sen!2sin!4v1792388677217!5m2!1sen!2sin"
+                  width="100%"
+                  height="360"
+                  style={{ border: 0, borderRadius: '12px', display: 'block' }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

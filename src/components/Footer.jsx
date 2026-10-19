@@ -48,7 +48,8 @@ export default function Footer() {
             <div className="flex gap-2.5">
               {[
                 { label: 'Facebook', href: '#', src: '/facebook.webp' },
-                { label: 'Instagram', href: '#', src: '/instagram.webp' },
+                { label: 'Instagram', href: 'https://www.instagram.com/aathisolarenergy', src: '/instagram.webp' },
+                { label: 'Youtube', href: 'https://www.youtube.com/@ponniahmh', src: '/Youtube.webp' },
                 { label: 'WhatsApp', href: 'https://wa.me/918056976800?text=Hi%2C%20I%27m%20interested%20in%20rooftop%20solar%20for%20my%20home.%20Please%20share%20details.', src: '/WhatsApp.webp' },
               ].map(s => (
                 <a key={s.label} href={s.href} aria-label={s.label}
@@ -133,10 +134,10 @@ export default function Footer() {
             © 2026 Aathi Solar Energy, Ravanasamudram. All rights reserved.
           </p>
 
-          <div className="flex gap-4 text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          <div className="flex gap-4 text-xs mr-4" style={{ color: 'rgba(255,255,255,0.35)' }}>
             <span>Site developed by Jayanthinathan</span>
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
+            {/* <span>Privacy Policy</span> */}
+            {/* <span>Terms of Service</span> */}
           </div>
         </div>
       </div>

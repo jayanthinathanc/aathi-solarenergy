@@ -36,13 +36,13 @@ export default function Navbar() {
             <img src="/logo.png" alt="Aathi Solar Energy" className="w-15 h-15 object-contain "></img>
             <div className="text-left">
               <div className={`font-extrabold leading-tight tracking-tight transition-colors ${scrolled ? 'text-green-900' : 'text-white'}`}
-                style={{ fontFamily: "'Outfit', sans-serif", fontSize: scrolled ? '1rem' : '1.1rem', color: scrolled ? '#2A5010' : 'white' }}>
+                style={{ fontFamily: "'Outfit', sans-serif", fontSize: scrolled ? '1.2rem' : '1.25rem', color: scrolled ? '#2A5010' : 'white' }}>
                 Aathi Solar Energy
               </div>
-              <div className={`text-xs leading-none font-medium ${scrolled ? 'text-muted' : 'text-white/65'}`}
+              {/* <div className={`text-xs leading-none font-medium ${scrolled ? 'text-muted' : 'text-white/65'}`}
                 style={{ color: scrolled ? '#5A6A55' : 'rgba(255,255,255,0.65)' }}>
                 Rooftop Solar for Homes
-              </div>
+              </div> */}
             </div>
           </button>
 
