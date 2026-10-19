@@ -2,8 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/a/macros/aathisolarenergy.com/s/AKfycbzEtg3iztvs17WKtC9uKv5Yi5d3JZAgkwzETnhx9i8ajtm8ZkmbZkxOTMqCD_nxMu7Q/exec'
-
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_qqgo1vu7iA8iOOoBSAUPVb9-duPtwAVlAD--zY6mhFMSN0RnpyGFkOHtohWyhAw5/exec'
 const homeTypes = ['Independent House', 'Apartment or Flat', 'Villa', 'Agriculture/Farm', 'Others']
 
 const emptyForm = {
