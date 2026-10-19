@@ -2,9 +2,9 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
 
-const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL'
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/a/macros/aathisolarenergy.com/s/AKfycbzEtg3iztvs17WKtC9uKv5Yi5d3JZAgkwzETnhx9i8ajtm8ZkmbZkxOTMqCD_nxMu7Q/exec'
 
-const homeTypes = ['Independent House', 'Apartment or Flat', 'Villa', 'Others']
+const homeTypes = ['Independent House', 'Apartment or Flat', 'Villa', 'Agriculture/Farm', 'Others']
 
 const emptyForm = {
   ebNumber: '',
@@ -15,17 +15,76 @@ const emptyForm = {
   city: '',
   pincode: '',
   homeType: '',
+  message: '',
+}
+
+function validate(form) {
+  const errs = {}
+  if (!form.ebNumber.trim()) {
+    errs.ebNumber = 'EB Number is required.'
+  } else if (!/^\d{3}-\d{8}$/.test(form.ebNumber.trim())) {
+    errs.ebNumber = 'Enter a valid EB Number (e.g. 070-34010718).'
+  }
+  if (!form.name.trim()) {
+    errs.name = 'Full name is required.'
+  } else if (form.name.trim().length < 2) {
+    errs.name = 'Name must be at least 2 characters.'
+  }
+  if (!form.phone.trim()) {
+    errs.phone = 'Phone number is required.'
+  } else if (!/^[0-9+\-\s]{10,15}$/.test(form.phone.trim())) {
+    errs.phone = 'Enter a valid 10-digit phone number.'
+  }
+  if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+    errs.email = 'Enter a valid email address.'
+  }
+  if (form.pincode.trim() && !/^\d{6}$/.test(form.pincode.trim())) {
+    errs.pincode = 'Pincode must be 6 digits.'
+  }
+  return errs
 }
 
 export default function ContactForm() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [form, setForm] = useState(emptyForm)
+  const [errors, setErrors] = useState({})
+  const [touched, setTouched] = useState({})
   const [status, setStatus] = useState('idle') // idle | loading | success | error
 
-  const set = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+  const set = (e) => {
+    const { name, value } = e.target
+    setForm(f => ({ ...f, [name]: value }))
+    if (touched[name]) {
+      setErrors(prev => {
+        const next = { ...prev }
+        delete next[name]
+        const fieldErrors = validate({ ...form, [name]: value })
+        if (fieldErrors[name]) next[name] = fieldErrors[name]
+        return next
+      })
+    }
+  }
+
+  const blur = (e) => {
+    const { name } = e.target
+    setTouched(prev => ({ ...prev, [name]: true }))
+    const fieldErrors = validate(form)
+    setErrors(prev => {
+      const next = { ...prev }
+      if (fieldErrors[name]) next[name] = fieldErrors[name]
+      else delete next[name]
+      return next
+    })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const errs = validate(form)
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs)
+      setTouched({ ebNumber: true, name: true, phone: true, email: true, pincode: true })
+      return
+    }
     setStatus('loading')
     const payload = new FormData()
     Object.entries({
@@ -38,17 +97,20 @@ export default function ContactForm() {
       city: form.city,
       pincode: form.pincode,
       homeType: form.homeType,
+      message: form.message,
       source: 'Website – Book Free Survey',
     }).forEach(([k, v]) => payload.append(k, v))
 
     try {
       const res = await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: payload })
-      if (res.ok) { setStatus('success'); setForm(emptyForm) }
+      if (res.ok) { setStatus('success'); setForm(emptyForm); setErrors({}); setTouched({}) }
       else throw new Error()
     } catch {
-      if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
+      if (GOOGLE_SCRIPT_URL === 'https://script.google.com/a/macros/aathisolarenergy.com/s/AKfycbzEtg3iztvs17WKtC9uKv5Yi5d3JZAgkwzETnhx9i8ajtm8ZkmbZkxOTMqCD_nxMu7Q/exec') {
         setStatus('success')
         setForm(emptyForm)
+        setErrors({})
+        setTouched({})
       } else {
         setStatus('error')
       }
@@ -164,15 +226,17 @@ export default function ContactForm() {
                     <label className="block text-xs font-semibold mb-1.5" style={{ color: '#CC1100' }}>
                       EB (Electricity Board) Number <span style={{ color: '#CC1100' }}>*</span>
                     </label>
-                    <input type="text" name="ebNumber" required
-                      placeholder="e.g. 068-020-004-000267820"
-                      value={form.ebNumber} onChange={set}
+                    <input type="text" name="ebNumber"
+                      placeholder="e.g. 070-34010718"
+                      maxLength={12}
+                      value={form.ebNumber} onChange={set} onBlur={blur}
                       className="form-field"
-                      style={{ borderColor: form.ebNumber ? '#2A5010' : undefined }}
+                      style={{ borderColor: errors.ebNumber ? '#CC1100' : form.ebNumber ? '#2A5010' : undefined }}
                     />
-                    <p className="text-xs mt-1" style={{ color: '#9aaa95' }}>
-                      Found on your TNEB electricity bill (Service No.)
-                    </p>
+                    {errors.ebNumber
+                      ? <p className="text-xs mt-1 font-medium" style={{ color: '#CC1100' }}>{errors.ebNumber}</p>
+                      : <p className="text-xs mt-1" style={{ color: '#9aaa95' }}>Found on your TNEB electricity bill (Service No.)</p>
+                    }
                   </div>
 
                   {/* Name + Phone */}
@@ -181,15 +245,21 @@ export default function ContactForm() {
                       <label className="block text-xs font-semibold mb-1.5" style={{ color: '#5A6A55' }}>
                         Full Name <span style={{ color: '#CC1100' }}>*</span>
                       </label>
-                      <input type="text" name="name" required placeholder="Rajan Kumar"
-                        value={form.name} onChange={set} className="form-field" />
+                      <input type="text" name="name" placeholder="Rajan Kumar"
+                        value={form.name} onChange={set} onBlur={blur}
+                        className="form-field"
+                        style={{ borderColor: errors.name ? '#CC1100' : undefined }} />
+                      {errors.name && <p className="text-xs mt-1 font-medium" style={{ color: '#CC1100' }}>{errors.name}</p>}
                     </div>
                     <div>
                       <label className="block text-xs font-semibold mb-1.5" style={{ color: '#5A6A55' }}>
                         Phone Number <span style={{ color: '#CC1100' }}>*</span>
                       </label>
-                      <input type="tel" name="phone" required placeholder="80569 76800"
-                        pattern="[0-9+\-\s]{10,15}" value={form.phone} onChange={set} className="form-field" />
+                      <input type="tel" name="phone" placeholder="80569 76800"
+                        value={form.phone} onChange={set} onBlur={blur}
+                        className="form-field"
+                        style={{ borderColor: errors.phone ? '#CC1100' : undefined }} />
+                      {errors.phone && <p className="text-xs mt-1 font-medium" style={{ color: '#CC1100' }}>{errors.phone}</p>}
                     </div>
                   </div>
 
@@ -199,7 +269,10 @@ export default function ContactForm() {
                       Email Address <span style={{ color: '#9aaa95', fontWeight: 400 }}>(optional)</span>
                     </label>
                     <input type="email" name="email" placeholder="you@example.com"
-                      value={form.email} onChange={set} className="form-field" />
+                      value={form.email} onChange={set} onBlur={blur}
+                      className="form-field"
+                      style={{ borderColor: errors.email ? '#CC1100' : undefined }} />
+                    {errors.email && <p className="text-xs mt-1 font-medium" style={{ color: '#CC1100' }}>{errors.email}</p>}
                   </div>
 
                   {/* Address */}
@@ -225,7 +298,10 @@ export default function ContactForm() {
                         Pincode <span style={{ color: '#9aaa95', fontWeight: 400 }}>(optional)</span>
                       </label>
                       <input type="text" name="pincode" placeholder="621212"
-                        pattern="[0-9]{6}" maxLength={6} value={form.pincode} onChange={set} className="form-field" />
+                        maxLength={6} value={form.pincode} onChange={set} onBlur={blur}
+                        className="form-field"
+                        style={{ borderColor: errors.pincode ? '#CC1100' : undefined }} />
+                    {errors.pincode && <p className="text-xs mt-1 font-medium" style={{ color: '#CC1100' }}>{errors.pincode}</p>}
                     </div>
                   </div>
 
@@ -257,6 +333,13 @@ export default function ContactForm() {
                         </label>
                       ))}
                     </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: '#5A6A55' }}>
+                      Message <span style={{ color: '#9aaa95', fontWeight: 400 }}></span>
+                    </label>
+                    <textarea name="message" placeholder="Tell us about your Solar requirements"
+                      maxLength={300} value={form.message} onChange={set} className="form-field" />
                   </div>
 
                   <button type="submit" disabled={status === 'loading'}
