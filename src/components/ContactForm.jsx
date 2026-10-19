@@ -102,18 +102,15 @@ export default function ContactForm() {
     }).forEach(([k, v]) => payload.append(k, v))
 
     try {
-      const res = await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: payload })
-      if (res.ok) { setStatus('success'); setForm(emptyForm); setErrors({}); setTouched({}) }
-      else throw new Error()
+      // Google Apps Script doesn't send CORS headers, so we use no-cors.
+      // The response will be opaque (unreadable) — we treat completion as success.
+      await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: payload, mode: 'no-cors' })
+      setStatus('success')
+      setForm(emptyForm)
+      setErrors({})
+      setTouched({})
     } catch {
-      if (GOOGLE_SCRIPT_URL === 'https://script.google.com/a/macros/aathisolarenergy.com/s/AKfycbzEtg3iztvs17WKtC9uKv5Yi5d3JZAgkwzETnhx9i8ajtm8ZkmbZkxOTMqCD_nxMu7Q/exec') {
-        setStatus('success')
-        setForm(emptyForm)
-        setErrors({})
-        setTouched({})
-      } else {
-        setStatus('error')
-      }
+      setStatus('error')
     }
   }
 
