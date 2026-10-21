@@ -35,8 +35,8 @@ export default function Navbar() {
           <button onClick={() => go('#hero')} className="flex items-center gap-2.5 bg-transparent border-none cursor-pointer">
             <img src="/logo.png" alt="Aathi Solar Energy" className="w-15 h-15 object-contain "></img>
             <div className="text-left">
-              <div className={`font-extrabold leading-tight tracking-tight transition-colors ${scrolled ? 'text-green-900' : 'text-white'}`}
-                style={{ fontFamily: "'Outfit', sans-serif", fontSize: scrolled ? '1.2rem' : '1.25rem', color: scrolled ? '#2A5010' : 'white' }}>
+              <div className={`font-extrabold leading-tight tracking-tight  uppercase transition-colors ${scrolled ? 'text-green-900' : 'text-white'}`}
+                style={{ fontFamily: "'Outfit', Arial", fontSize: scrolled ? '1.2rem' : '1.25rem', color: scrolled ? '#2A5010' : 'white' }}>
                 Aathi Solar Energy
               </div>
               {/* <div className={`text-xs leading-none font-medium ${scrolled ? 'text-muted' : 'text-white/65'}`}

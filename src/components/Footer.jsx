@@ -23,12 +23,12 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-5">
               <img src="/logo.png" alt="Aathi Solar Energy" className="w-15 h-15 object-contain "></img>
               <div>
-                <div className="text-white font-extrabold text-lg" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                <div className="text-white font-extrabold text-lg uppercase" style={{ fontFamily: "'Outfit', sans-serif" }}>
                   Aathi Solar Energy
                 </div>
-                <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>Tirunelveli · Tenkasi · All Tamil Nadu</div>
               </div>
             </div>
+            <div className="text-xs my-2" style={{ color: 'rgba(255,255,255,0.5)' }}>Exclusive in Tirunelveli & Tenkasi.</div>
             <p className="text-sm leading-relaxed mb-5" style={{ color: 'rgba(255,255,255,0.55)' }}>
               Tamil Nadu's trusted residential solar partner. Based in Ravanasamudram, we primarily serve Tirunelveli and Tenkasi — and install across all of Tamil Nadu. Survey to switch-on, fully handled.
             </p>
