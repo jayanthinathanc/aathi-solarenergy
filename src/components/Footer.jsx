@@ -48,9 +48,9 @@ export default function Footer() {
             <div className="flex gap-2.5">
               {[
                 { label: 'Facebook', href: 'https://www.facebook.com/share/19cmjiFrzp/', src: '/facebook.webp' },
-                { label: 'Instagram', href: 'https://www.instagram.com/aathisolarenergy', src: '/instagram.webp' },
-                { label: 'Youtube', href: 'https://www.youtube.com/@ponniahmh', src: '/Youtube.webp' },
                 { label: 'WhatsApp', href: 'https://wa.me/918056976800?text=Hi%2C%20I%27m%20interested%20in%20rooftop%20solar%20for%20my%20home.%20Please%20share%20details.', src: '/WhatsApp.webp' },
+                { label: 'Youtube', href: 'https://www.youtube.com/@ponniahmh', src: '/Youtube.webp' },
+                { label: 'Instagram', href: 'https://www.instagram.com/aathisolarenergy', src: '/instagram.webp' },
               ].map(s => (
                 <a key={s.label} href={s.href} aria-label={s.label}
                   target={s.label === 'WhatsApp' ? '_blank' : undefined}
